@@ -133,29 +133,39 @@ class GeradorHashGUI:
         # Frame para resultados da identificação
         result_id_frame = ttk.LabelFrame(identifier_frame, text="Informações do Hash", padding="10")
         result_id_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(10, 0))
+        result_id_frame.columnconfigure(0, weight=1)
         result_id_frame.columnconfigure(1, weight=1)
-        result_id_frame.rowconfigure(4, weight=1)
+        result_id_frame.rowconfigure(2, weight=1)
         
-        # Labels para mostrar informações
-        ttk.Label(result_id_frame, text="Tipo:", font=('Arial', 9, 'bold')).grid(row=0, column=0, sticky=tk.W, pady=2)
-        self.tipo_label = ttk.Label(result_id_frame, text="-", foreground="blue")
-        self.tipo_label.grid(row=0, column=1, sticky=tk.W, pady=2, padx=(10, 0))
+        # Coluna 1 - Informações básicas
+        basic_frame = ttk.Frame(result_id_frame)
+        basic_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S), padx=(0, 10))
         
-        ttk.Label(result_id_frame, text="Comprimento:", font=('Arial', 9, 'bold')).grid(row=1, column=0, sticky=tk.W, pady=2)
-        self.comprimento_label = ttk.Label(result_id_frame, text="-")
-        self.comprimento_label.grid(row=1, column=1, sticky=tk.W, pady=2, padx=(10, 0))
+        ttk.Label(basic_frame, text="Tipo:", font=('Arial', 8, 'bold')).grid(row=0, column=0, sticky=tk.W, pady=1)
+        self.tipo_label = ttk.Label(basic_frame, text="-", foreground="blue", font=('Arial', 8))
+        self.tipo_label.grid(row=0, column=1, sticky=tk.W, pady=1, padx=(10, 0))
         
-        ttk.Label(result_id_frame, text="Formato:", font=('Arial', 9, 'bold')).grid(row=2, column=0, sticky=tk.W, pady=2)
-        self.formato_label = ttk.Label(result_id_frame, text="-")
-        self.formato_label.grid(row=2, column=1, sticky=tk.W, pady=2, padx=(10, 0))
+        ttk.Label(basic_frame, text="Comprimento:", font=('Arial', 8, 'bold')).grid(row=1, column=0, sticky=tk.W, pady=1)
+        self.comprimento_label = ttk.Label(basic_frame, text="-", font=('Arial', 8))
+        self.comprimento_label.grid(row=1, column=1, sticky=tk.W, pady=1, padx=(10, 0))
         
-        ttk.Label(result_id_frame, text="Algoritmos Possíveis:", font=('Arial', 9, 'bold')).grid(row=3, column=0, sticky=tk.W, pady=2)
-        self.algoritmos_label = ttk.Label(result_id_frame, text="-")
-        self.algoritmos_label.grid(row=3, column=1, sticky=tk.W, pady=2, padx=(10, 0))
+        ttk.Label(basic_frame, text="Formato:", font=('Arial', 8, 'bold')).grid(row=2, column=0, sticky=tk.W, pady=1)
+        self.formato_label = ttk.Label(basic_frame, text="-", font=('Arial', 8))
+        self.formato_label.grid(row=2, column=1, sticky=tk.W, pady=1, padx=(10, 0))
         
-        ttk.Label(result_id_frame, text="Descrição:", font=('Arial', 9, 'bold')).grid(row=4, column=0, sticky=tk.NW, pady=2)
-        self.descricao_label = ttk.Label(result_id_frame, text="-", wraplength=500, justify=tk.LEFT)
-        self.descricao_label.grid(row=4, column=1, sticky=(tk.W, tk.N, tk.S), pady=2, padx=(10, 0))
+        # Coluna 2 - Informações detalhadas
+        detail_frame = ttk.Frame(result_id_frame)
+        detail_frame.grid(row=0, column=1, sticky=(tk.W, tk.E, tk.N, tk.S), padx=(10, 0))
+        detail_frame.columnconfigure(1, weight=1)
+        detail_frame.rowconfigure(1, weight=1)
+        
+        ttk.Label(detail_frame, text="Algoritmos Possíveis:", font=('Arial', 8, 'bold')).grid(row=0, column=0, sticky=tk.W, pady=1)
+        self.algoritmos_label = ttk.Label(detail_frame, text="-", font=('Arial', 8))
+        self.algoritmos_label.grid(row=0, column=1, sticky=tk.W, pady=1, padx=(10, 0))
+        
+        ttk.Label(detail_frame, text="Descrição:", font=('Arial', 8, 'bold')).grid(row=1, column=0, sticky=tk.NW, pady=1)
+        self.descricao_label = ttk.Label(detail_frame, text="-", wraplength=300, justify=tk.LEFT, font=('Arial', 8))
+        self.descricao_label.grid(row=1, column=1, sticky=(tk.W, tk.N), pady=1, padx=(10, 0))
         
         # Configura o grid
         identifier_frame.columnconfigure(0, weight=1)

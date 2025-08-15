@@ -110,7 +110,7 @@ def identificar_tipo_hash(hash_string):
         elif comprimento == 40:
             tipo = 'SHA-1'
             algoritmos_possiveis = ['SHA-1']
-            descricao = 'Hash SHA-1 (Secure Hash Algorithm 1) - 160 bits'
+            descricao = 'Hash SHA-1 - 160 bits'
         elif comprimento == 56:
             tipo = 'SHA-224'
             algoritmos_possiveis = ['SHA-224']
