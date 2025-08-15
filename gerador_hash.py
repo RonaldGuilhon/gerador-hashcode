@@ -1,6 +1,7 @@
 import hashlib
 import os
 import sys
+import re
 
 def gerar_hash(texto, algoritmo='sha256'):
     """
@@ -71,6 +72,80 @@ def gerar_hash_arquivo(caminho_arquivo, algoritmo='sha256'):
     
     except Exception as e:
         return f"Erro ao gerar hash do arquivo: {str(e)}"
+
+def identificar_tipo_hash(hash_string):
+    """
+    Identifica o tipo de hash baseado no comprimento e formato
+    
+    Args:
+        hash_string (str): String do hash para identificar
+    
+    Returns:
+        dict: Dicionário com informações sobre o hash
+    """
+    try:
+        # Remove espaços e converte para minúsculo
+        hash_limpo = hash_string.strip().lower()
+        
+        # Verifica se contém apenas caracteres hexadecimais
+        if not re.match(r'^[a-f0-9]+$', hash_limpo):
+            return {
+                'tipo': 'Inválido',
+                'comprimento': len(hash_limpo),
+                'formato': 'Não hexadecimal',
+                'algoritmos_possiveis': [],
+                'descricao': 'Hash contém caracteres inválidos (deve conter apenas 0-9 e a-f)'
+            }
+        
+        comprimento = len(hash_limpo)
+        algoritmos_possiveis = []
+        tipo = 'Desconhecido'
+        descricao = ''
+        
+        # Identifica baseado no comprimento
+        if comprimento == 32:
+            tipo = 'MD5'
+            algoritmos_possiveis = ['MD5']
+            descricao = 'Hash MD5 (Message Digest 5) - 128 bits'
+        elif comprimento == 40:
+            tipo = 'SHA-1'
+            algoritmos_possiveis = ['SHA-1']
+            descricao = 'Hash SHA-1 (Secure Hash Algorithm 1) - 160 bits'
+        elif comprimento == 56:
+            tipo = 'SHA-224'
+            algoritmos_possiveis = ['SHA-224']
+            descricao = 'Hash SHA-224 (Secure Hash Algorithm 224) - 224 bits'
+        elif comprimento == 64:
+            tipo = 'SHA-256'
+            algoritmos_possiveis = ['SHA-256', 'SHA3-256']
+            descricao = 'Hash SHA-256 (Secure Hash Algorithm 256) - 256 bits'
+        elif comprimento == 96:
+            tipo = 'SHA-384'
+            algoritmos_possiveis = ['SHA-384']
+            descricao = 'Hash SHA-384 (Secure Hash Algorithm 384) - 384 bits'
+        elif comprimento == 128:
+            tipo = 'SHA-512'
+            algoritmos_possiveis = ['SHA-512', 'SHA3-512']
+            descricao = 'Hash SHA-512 (Secure Hash Algorithm 512) - 512 bits'
+        else:
+            descricao = f'Comprimento não reconhecido ({comprimento} caracteres)'
+        
+        return {
+            'tipo': tipo,
+            'comprimento': comprimento,
+            'formato': 'Hexadecimal válido',
+            'algoritmos_possiveis': algoritmos_possiveis,
+            'descricao': descricao
+        }
+    
+    except Exception as e:
+        return {
+            'tipo': 'Erro',
+            'comprimento': 0,
+            'formato': 'Erro na análise',
+            'algoritmos_possiveis': [],
+            'descricao': f'Erro ao analisar hash: {str(e)}'
+        }
 
 def menu_principal():
     """
