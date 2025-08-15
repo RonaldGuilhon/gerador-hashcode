@@ -322,9 +322,28 @@ class GeradorHashGUI:
             messagebox.showerror("Erro", f"Erro ao copiar: {str(e)}")
         
     def limpar_resultado(self):
-        """Limpa a área de resultado"""
+        """Limpa a área de resultado e todos os campos de entrada de todas as abas"""
+        # Limpa a área de resultado
         self.result_text.delete("1.0", tk.END)
+        
+        # Limpa campos da aba "Hash de Texto"
+        self.text_input.delete("1.0", tk.END)
+        
+        # Limpa campos da aba "Identificador de Hash"
+        self.hash_input.delete("1.0", tk.END)
+        self.tipo_label.config(text="-", foreground="black")
+        self.comprimento_label.config(text="-")
+        self.formato_label.config(text="-")
+        self.algoritmos_label.config(text="-")
+        self.descricao_label.config(text="-")
+        
+        # Limpa campos da aba "Comparar Hashes"
+        self.hash1_entry.delete(0, tk.END)
+        self.hash2_entry.delete(0, tk.END)
         self.compare_result_label.config(text="")
+        
+        # Reset do algoritmo para o padrão (SHA256)
+        self.algoritmo_var.set("sha256")
         
     def salvar_resultado(self):
         """Salva o resultado em um arquivo"""
