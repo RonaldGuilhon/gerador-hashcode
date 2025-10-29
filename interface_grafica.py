@@ -210,7 +210,7 @@ class GeradorHashGUI:
         hash_resultado = gerar_hash(texto, algoritmo)
         
         # Exibe o resultado
-        resultado = f"=== HASH DE TEXTO ===\n"
+        resultado = f"\n=== HASH DE TEXTO ===\n"
         resultado += f"Texto: {texto[:100]}{'...' if len(texto) > 100 else ''}\n"
         resultado += f"Algoritmo: {algoritmo.upper()}\n"
         resultado += f"Hash: {hash_resultado}\n"
@@ -290,13 +290,13 @@ class GeradorHashGUI:
         
         if hash1 == hash2:
             self.compare_result_label.config(text="✅ HASHES IDÊNTICOS", foreground="green")
-            resultado = f"\n\n=== COMPARAÇÃO DE HASHES ===\n"
+            resultado = f"\n=== COMPARAÇÃO DE HASHES ===\n"
             resultado += f"Hash 1: {hash1}\n"
             resultado += f"Hash 2: {hash2}\n"
             resultado += f"Resultado: ✅ IDÊNTICOS - Os dados são iguais\n\n"
         else:
             self.compare_result_label.config(text="❌ HASHES DIFERENTES", foreground="red")
-            resultado = f"\n\n=== COMPARAÇÃO DE HASHES ===\n"
+            resultado = f"\n=== COMPARAÇÃO DE HASHES ===\n"
             resultado += f"Hash 1: {hash1}\n"
             resultado += f"Hash 2: {hash2}\n"
             resultado += f"Resultado: ❌ DIFERENTES - Os dados foram modificados\n\n"
