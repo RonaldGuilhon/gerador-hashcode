@@ -132,7 +132,7 @@ class GeradorHashGUI:
         
         # Frame para resultados da identificação
         result_id_frame = ttk.LabelFrame(identifier_frame, text="Informações do Hash", padding="10")
-        result_id_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(10, 0))
+        result_id_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(10, 20))
         result_id_frame.columnconfigure(0, weight=1)
         result_id_frame.columnconfigure(1, weight=1)
         result_id_frame.rowconfigure(2, weight=1)
@@ -260,7 +260,7 @@ class GeradorHashGUI:
             resultado_texto += f"Comprimento: {resultado['comprimento']} caracteres\n"
             resultado_texto += f"Formato: {resultado['formato']}\n"
             resultado_texto += f"Algoritmos possíveis: {algoritmos_str}\n"
-            resultado_texto += f"Descrição: {resultado['descricao']}\n"
+            resultado_texto += f"Descrição: {resultado['descricao']}\n\n"
             
             self.adicionar_resultado(resultado_texto)
             
